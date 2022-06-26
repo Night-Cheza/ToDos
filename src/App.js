@@ -5,37 +5,42 @@ import './App.css';
 
 const initialToDos = [{
   id: 1,
-  todo: "Prepare for midterm"
+  task: "Prepare for midterm"
 },
 {
   id: 2,
-  todo: "Unload dishwasher"
+  task: "Unload dishwasher"
 },
 {
   id: 3,
-  todo: "Unload dryer"
+  task: "Unload dryer"
 },
 {
   id: 4,
-  todo: "Fold laundry"
+  task: "Fold laundry"
 },
 {
   id: 5,
-  todo: "Build React app"
+  task: "Build React app"
 }];
 
 function App() {
-
   const [toDos, setToDos] = useState(initialToDos);  
+
+  const addNewTodoHandler = (todo) => {
+    setToDos(prevTodos => {
+      return [...prevTodos, todo];
+    });
+  };
 
   return (
     <div className="App">      
       <ul className="list">
         {toDos.map((item) => (
-          <li {...setToDos}><Checkbox /> {item.todo}</li>
+          <li><Checkbox /> {item.task}</li>
         ))}
       </ul>
-      <NewToDo />
+      <NewToDo onAddNewTodo = {addNewTodoHandler} />
     </div>
   );
 }

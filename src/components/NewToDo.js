@@ -1,27 +1,27 @@
 import { useState } from "react";
-function NewToDo() {
-    const [newTodo, setNewTodo] = useState(false);
 
-    const todo = {
-        id: 6,
-        todo: newTodo
-    }
+function NewToDo(props) {
+    const [newTodo, setNewTodo] = useState("");
 
     const handleChange= (event) => {
         setNewTodo(event.target.value);
-    }
+    };
 
-    const addToDo = (submittedToDos) => {
-        const item = {
-            ...submittedToDos, todo
+    const addToDo = (e) => {
+        e.preventDefault();
+        const todoItem = {
+            id:6,
+            task:newTodo
         };
 
-        setNewTodo(true);
+        props.onAddNewTodo(todoItem);
+
+        setNewTodo("");
     };
 
     return(
         <div>
-            <input type="text" onChange={handleChange}></input>
+            <input type="text" onChange={handleChange} value={newTodo}></input>
             <button type="button" onClick={addToDo}>Add todo</button>
         </div>
     );
