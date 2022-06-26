@@ -2,11 +2,20 @@ import { useState } from "react";
 function NewToDo() {
     const [newTodo, setNewTodo] = useState(false);
 
+    const todo = {
+        id: 6,
+        todo: newTodo
+    }
+
     const handleChange= (event) => {
         setNewTodo(event.target.value);
     }
 
-    const addToDo = () => {
+    const addToDo = (submittedToDos) => {
+        const item = {
+            ...submittedToDos, todo
+        };
+
         setNewTodo(true);
     };
 
