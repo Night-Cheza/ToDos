@@ -1,31 +1,35 @@
 import { useState } from 'react';
-import Checkbox from './components/Checkbox';
 import NewToDo from './components/NewToDo';
 import './App.css';
 
 const initialToDos = [{
   id: 1,
-  task: "Prepare for midterm"
+  task: "Prepare for midterm",
+  checked: false
 },
 {
   id: 2,
-  task: "Unload dishwasher"
+  task: "Unload dishwasher",
+  checked: false
 },
 {
   id: 3,
-  task: "Unload dryer"
+  task: "Unload dryer",
+  checked: false
 },
 {
   id: 4,
-  task: "Fold laundry"
+  task: "Fold laundry",
+  checked: false
 },
 {
   id: 5,
-  task: "Build React app"
+  task: "Build React app",
+  checked: false
 }];
 
 function App() {
-  const [toDos, setToDos] = useState(initialToDos);  
+  const [toDos, setToDos] = useState(initialToDos); 
 
   const addNewTodoHandler = (todo) => {
     setToDos(prevTodos => {
@@ -33,13 +37,20 @@ function App() {
     });
   };
 
+  const onChangeHandler = (e, i) => {
+    const checkList = [...toDos];
+    checkList[i].checked = !e.target.checked;
+  }
+
   return (
-    <div className="App">      
-      <ul className="list">
-        {toDos.map((item) => (
-          <li><Checkbox /> {item.task}</li>
+    <div className="App"> 
+        {toDos.map((task, i) => (
+          <div key={i} className="toDos-list">
+            <input value={task.task} type="checkbox" onChange={(e) => onChangeHandler(e, i)}/>
+            <label>{task.task}</label>
+          </div>
         ))}
-      </ul>
+
       <NewToDo onAddNewTodo = {addNewTodoHandler} />
     </div>
   );

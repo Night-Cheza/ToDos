@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./NewToDo.css";
 
 function NewToDo(props) {
     const [newTodo, setNewTodo] = useState("");
@@ -11,7 +12,8 @@ function NewToDo(props) {
         e.preventDefault();
         const todoItem = {
             id:6,
-            task:newTodo
+            task:newTodo,
+            checked: false
         };
 
         props.onAddNewTodo(todoItem);
