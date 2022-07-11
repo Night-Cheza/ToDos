@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import "./NewToDo.css";
 
@@ -10,13 +11,17 @@ function NewToDo(props) {
 
     const addToDo = (e) => {
         e.preventDefault();
-        const todoItem = {
-            id:6,
-            task:newTodo,
-            checked: false
-        };
 
-        props.onAddNewTodo(todoItem);
+        if(newTodo.trim().length !== 0) {
+            const todoItem = {
+                id:6,
+                task:newTodo,
+                checked: false
+            };
+            props.onAddNewTodo(todoItem);
+        } else {
+            alert("No todo to add");
+        }        
 
         setNewTodo("");
     };
